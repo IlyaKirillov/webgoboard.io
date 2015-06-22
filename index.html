@@ -10,23 +10,24 @@
 <body style="position:absolute;padding:0;margin:0;">
 <div id="divId" style="position:relative; height: 100vh;width: 100vw" onfocus="BodyFocus()" tabindex="-1"></div>
 <script>
-    var oGameTree = null;
+    var oGameTree = GoBoardApi.Create_GameTree();
+    GoBoardApi.Set_Sound(oGameTree, 'http://goban.org/Sound');
+    GoBoardApi.Create_BoardCommentsButtonsNavigator(oGameTree, "divId");
+    GoBoardApi.Focus(oGameTree);
+    GoBoardApi.Set_Permissions(oGameTree, {NewNode : false, Move : false, ChangeBoardMode : false, LoadFile : false, GameInfo : false});
+
+    window.onresize = function()
+    {
+        GoBoardApi.Update_Size(oGameTree);
+    };
+    window.onresize();
 
     $(function ()
     {
         $.get('files/Kogo\'s Joseki Dictionary.sgf', function(sgf)
         {
-            oGameTree = GoBoardApi.Create_GameTree();
-            GoBoardApi.Set_Sound(oGameTree, 'http://goban.org/Sound');
-            GoBoardApi.Create_BoardCommentsButtonsNavigator(oGameTree, "divId");
+            GoBoardApi.Set_Permissions(oGameTree, {NewNode : true, Move : true, ChangeBoardMode : true, LoadFile : true, GameInfo : true});
             GoBoardApi.Load_Sgf(oGameTree, sgf);
-            GoBoardApi.Focus(oGameTree);
-
-            document.getElementById("divId").onresize = function()
-            {
-                GoBoardApi.Update_Size(oGameTree);
-            };
-            window.onresize();
         });
 
     });
@@ -36,7 +37,6 @@
         if (oGameTree)
             GoBoardApi.Focus(oGameTree);
     }
-
 </script>
 </body>
 </html>
