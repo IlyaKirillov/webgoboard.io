@@ -12,20 +12,8 @@
 <body></body>
 
 <script>
-
     OnDocumentReady();
-    GoBoardApi.Set_Permissions(oGameTree, {NewNode : false, Move : false, ChangeBoardMode : false, LoadFile : false, GameInfo : false});
-
-    $(function ()
-    {
-        $.get('files/Kogo\'s Joseki Dictionary.sgf', function(sgf)
-        {
-            GoBoardApi.Set_Permissions(oGameTree, {NewNode : true, Move : true, ChangeBoardMode : true, LoadFile : true, GameInfo : true});
-            GoBoardApi.Load_Sgf(oGameTree, sgf);
-        });
-
-    });
-
+    GoBoardApi.Load_Sgf(oGameTree, "(;FF[4]SZ[13])");
 </script>
 
 </html>
