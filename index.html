@@ -27,7 +27,7 @@
 
         $(function ()
         {
-            $.get('backend/fetch.php?url=' + sFileUrl, function(sFileText)
+            $.get(sFileUrl, function(sFileText)
             {
                 OnLoadFile(sFileText, sExt);
             });
