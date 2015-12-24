@@ -22,23 +22,14 @@
 
     if (sFileUrl && "" !== sFileUrl)
     {
-        sFileUrl = decodeURIComponent(sFileUrl);
-
         var sExt = sFileUrl.split('.').pop().toLowerCase();
-        var rawFile = new XMLHttpRequest();
-        rawFile.open("GET", sFileUrl, false);
-        rawFile.onreadystatechange = function ()
+        $(function ()
         {
-            if(rawFile.readyState === 4)
+            $.get(sFileUrl, function(sFileText)
             {
-                if(rawFile.status === 200 || rawFile.status == 0)
-                {
-                    var sFileText = rawFile.responseText;
-                    OnLoadFile(sFileText);
-                }
-            }
-        };
-        rawFile.send(null);
+                OnLoadFile(sFileText, sExt);
+            });
+        });
     }
     else if (sFileRaw && "" !== sFileRaw)
     {
