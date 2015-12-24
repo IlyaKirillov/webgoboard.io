@@ -22,10 +22,12 @@
 
     if (sFileUrl && "" !== sFileUrl)
     {
+
         var sExt = sFileUrl.split('.').pop().toLowerCase();
+
         $(function ()
         {
-            $.get(sFileUrl, function(sFileText)
+            $.get('backend/fetch.php?url= + "sFileUrl"', function(sFileText)
             {
                 OnLoadFile(sFileText, sExt);
             });
