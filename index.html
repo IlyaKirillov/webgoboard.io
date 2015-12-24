@@ -14,18 +14,56 @@
 
 <script>
 
+    var sFileUrl = location.search.split('url=')[1];
+    var sFileRaw = location.search.split("raw=")[1];
+
     OnDocumentReady();
     GoBoardApi.Set_Permissions(oGameTree, {NewNode : false, Move : false, ChangeBoardMode : false, LoadFile : false, GameInfo : false});
 
-    $(function ()
+    if (sFileUrl && "" !== sFileUrl)
     {
-        $.get('files/Kogo\'s Joseki Dictionary.sgf', function(sgf)
-        {
-            GoBoardApi.Set_Permissions(oGameTree, {NewNode : true, Move : true, ChangeBoardMode : true, LoadFile : true, GameInfo : true});
-            GoBoardApi.Load_Sgf(oGameTree, sgf);
-        });
+        sFileUrl = decodeURIComponent(sFileUrl);
 
-    });
+        var sExt = sFileUrl.split('.').pop().toLowerCase();
+        var rawFile = new XMLHttpRequest();
+        rawFile.open("GET", sFileUrl, false);
+        rawFile.onreadystatechange = function ()
+        {
+            if(rawFile.readyState === 4)
+            {
+                if(rawFile.status === 200 || rawFile.status == 0)
+                {
+                    var sFileText = rawFile.responseText;
+                    OnLoadFile(sFileText);
+                }
+            }
+        };
+        rawFile.send(null);
+    }
+    else if (sFileRaw && "" !== sFileRaw)
+    {
+        var sFileText = Decode_UTF8(Decode_Base64_UrlSafe(sFileRaw));
+        var sExt = sFileText.substr(0, 3);
+        sFileText = sFileText.substr(3);
+        OnLoadFile(sFileText);
+    }
+    else
+    {
+        $(function ()
+        {
+            $.get('files/Kogo\'s Joseki Dictionary.sgf', function(sgf)
+            {
+                OnLoadFile(sgf);
+            });
+        });
+    }
+
+    function OnLoadFile(sFile, sExt)
+    {
+        GoBoardApi.Set_Permissions(oGameTree, {NewNode : true, Move : true, ChangeBoardMode : true, LoadFile : true, GameInfo : true});
+        GoBoardApi.Load_Sgf(oGameTree, sFile, null, null, sExt);
+        document.title = GoBoardApi.Get_MatchName(oGameTree);
+    }
 
 </script>
 

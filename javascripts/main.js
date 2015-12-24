@@ -128,3 +128,45 @@ function OnDocumentReadyProblems()
     LoadGameTreeProblems();
     window.onresize();
 }
+
+function Decode_Base64_UrlSafe(sInput)
+{
+    sInput = sInput.replace(new RegExp("~", 'g'), '+');
+    sInput = sInput.replace(new RegExp("-", 'g'), '/');
+    sInput = sInput.replace(new RegExp("_", 'g'), '=');
+    return atob(sInput);
+}
+
+function Decode_UTF8(sUtf8Text)
+{
+    var sString = "";
+    var nPos = 0;
+    var nCharCode1 = 0, nCharCode2 = 0, nCharCode3 = 0;
+
+    var nLen = sUtf8Text.length;
+    while (nPos < nLen)
+    {
+        nCharCode1 = sUtf8Text.charCodeAt(nPos);
+
+        if (nCharCode1 < 128)
+        {
+            sString += String.fromCharCode(nCharCode1);
+            nPos++;
+        }
+        else if((nCharCode1 > 191) && (nCharCode1 < 224))
+        {
+            nCharCode2 = sUtf8Text.charCodeAt(nPos + 1);
+            sString += String.fromCharCode(((nCharCode1 & 31) << 6) | (nCharCode2 & 63));
+            nPos += 2;
+        }
+        else
+        {
+            nCharCode2 = sUtf8Text.charCodeAt(nPos + 1);
+            nCharCode3 = sUtf8Text.charCodeAt(nPos + 2);
+            sString += String.fromCharCode(((nCharCode1 & 15) << 12) | ((nCharCode2 & 63) << 6) | (nCharCode3 & 63));
+            nPos += 3;
+        }
+    }
+
+    return sString;
+}
