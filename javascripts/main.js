@@ -133,7 +133,6 @@ function OnDocumentReadyProblems()
 function OnDocumentReadyWPPlugin()
 {
     LoadMenu();
-    LoadMainDiv();
 }
 
 function Decode_Base64_UrlSafe(sInput)
