@@ -5,6 +5,8 @@
     <title>Word Press Plugin</title>
     <script type="text/javascript" language="JavaScript" src="javascripts/goboardmin.js"></script>
     <script type="text/javascript" language="JavaScript" src="javascripts/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" language="JavaScript" src="javascripts/main.js"></script>
+    <link rel="stylesheet" type="text/css" href="stylesheets/main.css">
     <link rel="icon" href="files/favicon.ico" type="image/x-icon">
 </head>
 <body>
@@ -25,5 +27,8 @@ Installation
 
 </body>
 
+<script>
+    OnDocumentReadyWPPlugin();
+</script>
 
 </html>
