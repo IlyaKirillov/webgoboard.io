@@ -130,6 +130,12 @@ function OnDocumentReadyProblems()
     window.onresize();
 }
 
+function OnDocumentReadyWPPlugin()
+{
+    LoadMenu();
+    LoadMainDiv();
+}
+
 function Decode_Base64_UrlSafe(sInput)
 {
     sInput = sInput.replace(new RegExp("~", 'g'), '+');
