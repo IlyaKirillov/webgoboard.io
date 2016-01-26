@@ -34,6 +34,7 @@ function LoadMenu()
     AddMenuItem(oMenu, "http://www.webgoboard.com/9", "Board 9x9");
     AddMenuItem(oMenu, "http://www.webgoboard.com/introduction", "Introduction to Go");
     AddMenuItem(oMenu, "http://www.webgoboard.com/problems", "Problems");
+    AddMenuItem(oMenu, "http://www.webgoboard.com/wordpressplugin", "WordPress Plugin");
 
     document.body.appendChild(oMenu);
 }
