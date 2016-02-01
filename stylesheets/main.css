@@ -7,6 +7,7 @@
     width     : 100%;
     border    : 1px solid #625e00;
     background: black center center repeat-x;
+    box-sizing: border-box;
 }
 
 .topmenu li

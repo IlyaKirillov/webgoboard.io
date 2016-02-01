@@ -18,6 +18,16 @@
             padding: 0 2px;
             display: inline-block;
         }
+
+        div.para {
+            margin-left: 30px;
+        }
+
+        p.breakword {
+            -ms-word-break: break-all;
+            word-break: break-all;
+            word-break: break-word;
+        }
     </style>
 
     <link rel="icon" href="files/favicon.ico" type="image/x-icon">
@@ -53,9 +63,9 @@
         Usage
     </h2>
 
-    <div>
+    <div class="para">
         <p>
-            The plugin add new shortcode to the WordPress instllation:<span class="code"><strong>[webgoboard]...[/webgoboard]</strong></span>
+            The plugin add new shortcode to the WordPress installation:<span class="code"><strong>[webgoboard]...[/webgoboard]</strong></span>
         </p>
     </div>
 
@@ -63,38 +73,230 @@
         Loading file
     </h3>
 
-    <div>
+    <div class="para">
         <p>
-            There are two ways to load file: by url <span style="font-style:italic">from your site</span> (it is not possible to load a file from a remote server due to security reasons) or to type in the SGF-data directly inside the shortcode block.
+            There are two ways to load file: by url <span style="font-style:italic">from your site</span> (it is not possible to load a file from a remote server due to security reasons) or to type in the SGF-data directly inside the shortcode block. Ngf and Gib files are also supported.
         </p>
     </div>
 
-    <div>
-        <p style="font-style:italic">
-            Example 1: Loading by url
-        </p>
-
+    <h4>
+        Example 1: Loading by url
+    </h4>
+    <div class="para">
         <p>
             <span class="code"><strong>[webgoboard</strong> url="/wp-content/uploads/2016/01/example.sgf"<strong>][/webgoboard]</strong></span>
         </p>
     </div>
 
-    <div style="position:relative" id="idGameTree1"></div>
+    <div  class="para" style="position:relative" id="idGameTree1"></div>
     <script>GoBoardApi.Embed('idGameTree1', {sgfUrl : '/files/Honinbo Shuwa vs. Honinbo Shusaku.sgf'});</script>
 
-    <div>
-        <p style="font-style:italic">
-            Example 2: Loading by SGF-data
-        </p>
-        <p class="code" style="-ms-word-break: break-all;word-break: break-all;word-break: break-word;">
+    <h4>
+        Example 2: Loading by SGF-data
+    </h4>
+    <div class="para">
+        <p class="code breakword">
             <span class="code"><strong>[webgoboard]</strong>
             <code>(;SZ[9]EV[9x9 game]PB[Miyamoto Naoki]PW[Go Seigen]KM[0]DT[1968]RE[B+4];B[de];W[fe];B[ee];W[fd];B[ff];W[gf];B[gg];W[fg];B[ef];W[gh];B[hg];W[hh];B[eg];W[fh];B[ge];W[hf];B[he];W[ig];B[fc];W[gd];B[gc];W[hd];B[ed];W[be];B[hc];W[ie];B[bc];W[cg];B[cf];W[bf];B[ch];W[cc];B[cb];W[dg];B[dh];W[bh];B[eh];W[dc];B[bd];W[ec];B[cd];W[fb];B[gb];W[bb];B[eb];W[db];B[fa];W[ca];B[ea];W[da];B[df];W[bg];B[bi];W[ab];B[ah];W[ci];B[di];W[ag];B[ae];W[ac];B[ad];W[ha];B[hb];W[fi];B[ce];W[ai];B[ci];W[ei];B[ah];W[ic];B[ib];W[ai];B[ba];W[aa];B[ah];W[ga];B[ia];W[ai];B[ga];W[id])</code>
             <strong>[/webgoboard]</strong></span>
         </p>
     </div>
 
-    <div style="position:relative" id="idGameTree2"></div>
+    <div  class="para" style="position:relative" id="idGameTree2"></div>
     <script>GoBoardApi.Embed('idGameTree2', {sgfData : '(;SZ[9]EV[9x9 game]PB[Miyamoto Naoki]PW[Go Seigen]KM[0]DT[1968]RE[B+4];B[de];W[fe];B[ee];W[fd];B[ff];W[gf];B[gg];W[fg];B[ef];W[gh];B[hg];W[hh];B[eg];W[fh];B[ge];W[hf];B[he];W[ig];B[fc];W[gd];B[gc];W[hd];B[ed];W[be];B[hc];W[ie];B[bc];W[cg];B[cf];W[bf];B[ch];W[cc];B[cb];W[dg];B[dh];W[bh];B[eh];W[dc];B[bd];W[ec];B[cd];W[fb];B[gb];W[bb];B[eb];W[db];B[fa];W[ca];B[ea];W[da];B[df];W[bg];B[bi];W[ab];B[ah];W[ci];B[di];W[ag];B[ae];W[ac];B[ad];W[ha];B[hb];W[fi];B[ce];W[ai];B[ci];W[ei];B[ah];W[ic];B[ib];W[ai];B[ba];W[aa];B[ah];W[ga];B[ia];W[ai];B[ga];W[id])'});</script>
+
+    <h3>
+        Options
+    </h3>
+
+    <h4>
+        width
+    </h4>
+    <div class="para">
+        <p>
+            Specify width in <strong>px</strong>. The default value depends on the mode (see below).
+        </p>
+    </div>
+
+    <h4>
+        movenumber
+    </h4>
+    <div class="para">
+        <p>
+            Set initial move number. Zero is the default value.
+        </p>
+    </div>
+
+    <h4>
+        viewport
+    </h4>
+    <div class="para">
+        <p>
+            Set the viewport of the board. The format is "left, top, right, bottom" or just "auto". Note that coordinates start with 0.
+            Example: <span class="code"><strong>[webgoboard</strong> viewport="0,0,9,9"<strong>][/webgoboard]</strong></span> or <span class="code"><strong>[webgoboard</strong> viewport="auto"<strong>][/webgoboard]</strong></span>.
+            The default value is <span class="code">"auto"</span> for problems mode and <span class="code">"0, 0, SizeX - 1, SizeY - 1"</span> for others modes.
+        </p>
+    </div>
+
+    <h4>
+        mode
+    </h4>
+    <div class="para">
+
+        <p>
+            There are several different modes.
+        </p>
+
+        <ol>
+
+            <li style="width:700px">
+
+                <p>
+                    Static image. <span class="code">mode="image"</span>
+                </p>
+
+
+                <div style="float:left;position:relative" id="idGameTreeStaticImage"></div>
+                <script>GoBoardApi.Embed('idGameTreeStaticImage', {moveNumber : '6', boardMode : 'image', viewPort : {X0 : 0, Y0 : 0, X1 : 9, Y1: 6}, width : '300', sgfData : '(;GM[1]FF[4]CA[UTF-8]AP[WebGoBoard:0.10.0]ST[2]SZ[19]KM[0]HA[0]PB[Black]PW[White];B[dd];W[fc];B[cf];W[db];B[cc];LB[dd:1][fc:2][db:3][cc:4][cf:5][ic:6]W[ic])'});</script>
+
+                <div style="float:left; margin-left:20px;width:300px">
+                    <p class="breakword">
+                        <span class="code"><strong>[webgoboard</strong> mode='image' viewport='0,0,9,6' movenumber='6' width='300'"<strong>]</strong><code>(;GM[1]FF[4]CA[UTF-8]AP[WebGoBoard:0.10.0]ST[2]SZ[19]KM[0]HA[0]PB[Black]PW[White];B[dd];W[fc];B[cf];W[db];B[cc];LB[dd:1][fc:2][db:3][cc:4][cf:5][ic:6]W[ic])</code><strong>[/webgoboard]</strong></span>
+                    </p>
+                </div>
+
+                <div style="clear:both"></div>
+
+            </li>
+
+            <li style="width:700px">
+
+                <p>
+                    Viewer (default mode). <span class="code">mode="viewer"</span>
+                </p>
+
+
+                <div style="float:left;position:relative" id="idGameTreeViewer"></div>
+                <script>GoBoardApi.Embed('idGameTreeViewer', {boardMode : 'viewer', width : '300', sgfData : '(;GM[1]FF[4]CA[UTF-8]AP[WebGoBoard:0.10.0]ST[2]SZ[19]KM[0]HA[0]PB[Black]PW[White];B[dd];W[fc];B[cf];W[db];B[cc];LB[dd:1][fc:2][db:3][cc:4][cf:5][ic:6]W[ic])'});</script>
+
+                <div style="float:left; margin-left:20px;width:300px">
+                    <p class="breakword">
+                        <span class="code"><strong>[webgoboard</strong> mode='viewer' width='300'"<strong>]</strong><code>(;GM[1]FF[4]CA[UTF-8]AP[WebGoBoard:0.10.0]ST[2]SZ[19]KM[0]HA[0]PB[Black]PW[White];B[dd];W[fc];B[cf];W[db];B[cc];LB[dd:1][fc:2][db:3][cc:4][cf:5][ic:6]W[ic])</code><strong>[/webgoboard]</strong></span>
+                    </p>
+                </div>
+                <div style="clear:both"></div>
+
+            </li>
+
+            <li style="width:700px">
+
+                <p>
+                    Editor with vertical layout. <span class="code">mode="vereditor"</span>
+                </p>
+
+
+                <div style="float:left;position:relative" id="idGameTreeVerEditor"></div>
+                <script>GoBoardApi.Embed('idGameTreeVerEditor', {boardMode : 'vereditor', width : '350', sgfData : '(;GM[1]FF[4]CA[UTF-8]AP[WebGoBoard:0.10.0]ST[2]SZ[19]KM[0]HA[0]PB[Black]PW[White];B[dd];W[fc];B[cf];W[db];B[cc];LB[dd:1][fc:2][db:3][cc:4][cf:5][ic:6]W[ic])'});</script>
+
+                <div style="float:left; margin-left:20px;width:300px">
+                    <p class="breakword">
+                        <span class="code"><strong>[webgoboard</strong> mode='vereditor' width='350'"<strong>]</strong><code>(;GM[1]FF[4]CA[UTF-8]AP[WebGoBoard:0.10.0]ST[2]SZ[19]KM[0]HA[0]PB[Black]PW[White];B[dd];W[fc];B[cf];W[db];B[cc];LB[dd:1][fc:2][db:3][cc:4][cf:5][ic:6]W[ic])</code><strong>[/webgoboard]</strong></span>
+                    </p>
+                </div>
+                <div style="clear:both"></div>
+
+            </li>
+
+            <li style="width:700px">
+
+                <p>
+                    Editor with horizontal layout. <span class="code">mode="horeditor"</span>
+                </p>
+
+
+                <div style="position:relative" id="idGameTreeHorEditor"></div>
+                <script>GoBoardApi.Embed('idGameTreeHorEditor', {boardMode : 'horeditor', width : '700', sgfData : '(;GM[1]FF[4]CA[UTF-8]AP[WebGoBoard:0.10.0]ST[2]SZ[19]KM[0]HA[0]PB[Black]PW[White];B[dd];W[fc];B[cf];W[db];B[cc];LB[dd:1][fc:2][db:3][cc:4][cf:5][ic:6]W[ic])'});</script>
+
+                <div>
+                    <p class="breakword">
+                        <span class="code"><strong>[webgoboard</strong> mode='horeditor' width='700'"<strong>]</strong><code>(;GM[1]FF[4]CA[UTF-8]AP[WebGoBoard:0.10.0]ST[2]SZ[19]KM[0]HA[0]PB[Black]PW[White];B[dd];W[fc];B[cf];W[db];B[cc];LB[dd:1][fc:2][db:3][cc:4][cf:5][ic:6]W[ic])</code><strong>[/webgoboard]</strong></span>
+                    </p>
+                </div>
+                <div style="clear:both"></div>
+
+            </li>
+
+            <li style="width:700px">
+
+                <p>
+                    Problems mode. <span class="code">mode="problems"</span>
+                </p>
+
+
+                <div style="position:relative" id="idGameTreeProblem"></div>
+                <script>GoBoardApi.Embed('idGameTreeProblem', {boardMode : 'problems', width : '700', sgfData : "(;GE[tesuji]DI[5k]DP[32]SO[kochi]CO[7]AB[ab]AB[ba]AB[cb]AB[bc]AB[dc]AB[dd]AB[dg]AB[cg]AB[eg]AB[gf]AB[hg]AB[fd]AB[hd]AW[db]AW[cc]AW[ce]AW[cd]AW[cf]AW[eb]AW[ec]AW[fc]AW[gc]AW[ic]AW[jc]AP[goproblems]PL[W](;W[fe](;B[ee](;W[ef](;B[df]C[CHOICE](;W[de]C[RIGHT])(;W[ed];B[de])(;W[gd];B[de]))(;B[de]C[CHOICE];W[df]C[RIGHT])(;B[ff]C[CHOICE](;W[ed]C[RIGHT])(;W[de]C[RIGHT])))(;W[de];B[ed](;W[gd];B[ef])(;W[ef];B[gd]))(;W[ed];B[de])(;W[df];B[ed];W[gd];B[ef]))(;B[ed];W[gd]C[RIGHT]))(;W[de];B[ed](;W[gd];B[fe])(;W[ee];B[fe])(;W[fe];B[gd]))(;W[ed];B[de](;W[df];B[ee](;W[ef];B[fe](;W[ff];B[fg](;W[ge];B[gd];W[he];B[ie])(;W[gd];B[ge])(;W[he];B[ge]))(;W[ge];B[ff])(;W[gd];B[ff]))(;W[fe];B[ef]))(;W[ee];B[df]))(;W[ee];B[ed](;W[gd];B[fe](;W[ef];B[ff])(;W[ff];B[ge])(;W[ge];B[ff]))(;W[fe];B[gd];W[ge];B[he];W[ff];B[fg])(;W[ge];B[gd](;W[he];B[fe](;W[ef];B[ff])(;W[ff];B[ef]))(;W[fe];B[he])))(;W[ca];B[da]C[You just gave Black 1 extra prisoner.  He also could have responded e16 and fought the ko.  Since you have a chance to kill cleanly, giving him this chance is wrong.])(;W[da](;B[ed])(;B[de]C[If B wants to try a ko he can play this way, but usually he'd just connect at c19 and you would have wasted a move.];W[ca];B[bb];W[bd];B[ad];W[bf];B[bg];W[ae];B[ag];W[ac]C[Ko for the 4 white stones, but you could have saved them unconditionally.])))"});</script>
+
+                <div>
+                    <p class="breakword">
+                        <span class="code"><strong>[webgoboard</strong> mode='problems' width='700'"<strong>]</strong><code>(;GE[tesuji]DI[5k]DP[32]SO[kochi]CO[7]AB[ab]AB[ba]AB[cb]AB[bc]AB[dc]AB[dd]AB[dg]AB[cg]AB[eg]AB[gf]AB[hg]AB[fd]AB[hd]AW[db]AW[cc]AW[ce]AW[cd]AW[cf]AW[eb]AW[ec]AW[fc]AW[gc]AW[ic]AW[jc]AP[goproblems]PL[W](;W[fe](;B[ee](;W[ef](;B[df]C[CHOICE](;W[de]C[RIGHT])(;W[ed];B[de])(;W[gd];B[de]))(;B[de]C[CHOICE];W[df]C[RIGHT])(;B[ff]C[CHOICE](;W[ed]C[RIGHT])(;W[de]C[RIGHT])))(;W[de];B[ed](;W[gd];B[ef])(;W[ef];B[gd]))(;W[ed];B[de])(;W[df];B[ed];W[gd];B[ef]))(;B[ed];W[gd]C[RIGHT]))(;W[de];B[ed](;W[gd];B[fe])(;W[ee];B[fe])(;W[fe];B[gd]))(;W[ed];B[de](;W[df];B[ee](;W[ef];B[fe](;W[ff];B[fg](;W[ge];B[gd];W[he];B[ie])(;W[gd];B[ge])(;W[he];B[ge]))(;W[ge];B[ff])(;W[gd];B[ff]))(;W[fe];B[ef]))(;W[ee];B[df]))(;W[ee];B[ed](;W[gd];B[fe](;W[ef];B[ff])(;W[ff];B[ge])(;W[ge];B[ff]))(;W[fe];B[gd];W[ge];B[he];W[ff];B[fg])(;W[ge];B[gd](;W[he];B[fe](;W[ef];B[ff])(;W[ff];B[ef]))(;W[fe];B[he])))(;W[ca];B[da]C[You just gave Black 1 extra prisoner.  He also could have responded e16 and fought the ko.  Since you have a chance to kill cleanly, giving him this chance is wrong.])(;W[da](;B[ed])(;B[de]C[If B wants to try a ko he can play this way, but usually he'd just connect at c19 and you would have wasted a move.];W[ca];B[bb];W[bd];B[ad];W[bf];B[bg];W[ae];B[ag];W[ac]C[Ko for the 4 white stones, but you could have saved them unconditionally.])))</code><strong>[/webgoboard]</strong></span>
+                    </p>
+                </div>
+                <div style="clear:both"></div>
+
+                <h3>
+                    Additional options for problems mode.
+                </h3>
+
+                <h4>
+                    problemstime
+                </h4>
+                <div class="para">
+                    <p>
+                        Specify the answer delay time. The default value is 0.3 sec.
+                    </p>
+                </div>
+
+                <h4>
+                    problemscolor
+                </h4>
+                <div class="para">
+                    <p>
+                        Specify the tutorial color. Allowed values are <span class="code">"Black" "White" "Auto"</span>. The default value is <span class="code">"Auto"</span>.
+                    </p>
+                </div>
+
+                <h4>
+                    problemsnewnode
+                </h4>
+                <div class="para">
+                    <p>
+                        By default user doesn't allowed to add new nodes. Other words he can't do moves out of variants. If u wan't to allow user to add new nodes, than specify <span class="code">problemsnewnode</span>
+                        option. The value is a string that will be displayed to the user in comments when he will make new move which is out of variants. The string must not be empty.
+                    </p>
+                </div>
+
+
+                <div>
+                    <p>
+                        Example
+                    </p>
+                </div>
+
+                <div style="position:relative" id="idGameTreeProblemsExample"></div>
+                <script>GoBoardApi.Embed('idGameTreeProblemsExample', {boardMode : 'problems', width : '700', problemsTime : '1', problemsColor : 'White', problemsNewNode : 'Out of variants.', sgfData : '(;GE[fuseki]DI[5d]DP[4]SO[Spirit]CO[7]GM[1]FF[4]AP[Hibiscus:2.1]SZ[19]ST[3]PL[B]AB[dd][jd][jf][pd][pf]AW[hc][jc][md];B[kc];W[kd](;B[ic];W[jb](;B[ld];W[ke];B[je]C[RIGHT])(;B[je];W[ib];B[ld];W[lc];B[ke];W[kb]C[White is connected.]))(;B[ld];W[ke](;B[je];W[lc];B[ic];W[kb];B[ib]C[White has been cut yet Black couldhave done this in a more fiendish way.])(;B[ic];W[jb];B[je]C[RIGHT])))'});</script>
+
+                <div>
+                    <p class="breakword">
+                        <span class="code"><strong>[webgoboard</strong> mode='problems' width='700' problemstime='1' problemscolor='White' problemsnewnode='Out of variants.'"<strong>]</strong><code>(;GE[fuseki]DI[5d]DP[4]SO[Spirit]CO[7]GM[1]FF[4]AP[Hibiscus:2.1]SZ[19]ST[3]PL[B]AB[dd][jd][jf][pd][pf]AW[hc][jc][md];B[kc];W[kd](;B[ic];W[jb](;B[ld];W[ke];B[je]C[RIGHT])(;B[je];W[ib];B[ld];W[lc];B[ke];W[kb]C[White is connected.]))(;B[ld];W[ke](;B[je];W[lc];B[ic];W[kb];B[ib]C[White has been cut yet Black couldhave done this in a more fiendish way.])(;B[ic];W[jb];B[je]C[RIGHT])))</code><strong>[/webgoboard]</strong></span>
+                    </p>
+                </div>
+                <div style="clear:both"></div>
+
+            </li>
+
+        </ol>
+
+    </div>
 
 </div>
 
