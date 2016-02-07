@@ -17,7 +17,7 @@
     var sFileUrl = location.search.split('url=')[1];
     var sFileRaw = location.search.split("raw=")[1];
 
-    OnDocumentReady();
+    OnDocumentReady("index");
     GoBoardApi.Set_Permissions(oGameTree, {NewNode : false, Move : false, ChangeBoardMode : false, LoadFile : false, GameInfo : false});
 
     if (sFileUrl && "" !== sFileUrl)

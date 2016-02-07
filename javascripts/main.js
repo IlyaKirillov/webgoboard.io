@@ -8,35 +8,117 @@
  * Date     26.06.15
  * Time     23:10
  */
-var oGameTree = null;
+var oGameTree   = null;
+var nMenuHeight = 50;
 
-function LoadMenu()
+function LoadMenu(sActive)
 {
-    var oMenu = document.createElement("ul");
-    oMenu.className = "topmenu";
-    oMenu.id        = "menuId";
+    var oMenu = document.createElement("div");
 
-    function AddMenuItem(oMenu, sLink, sTitle)
+    oMenu.id                    = "menuId";
+    oMenu.style.position        = "absolute";
+    oMenu.style.top             = "0px";
+    oMenu.style.left            = "0px";
+    oMenu.style.fontSize        = "12px";
+    oMenu.style.fontFamily      = "'Segoe UI', Helvetica, Tahoma, Geneva, Verdana, sans-serif";
+    oMenu.style.cursor          = "default";
+    oMenu.style.width           = "100vw";
+    oMenu.style.height          = "50px";
+    oMenu.style.backgroundColor = "rgb(5, 7, 8)";
+
+    var oMenuTabs = document.createElement("div");
+
+    oMenuTabs.style["float"] = "left";
+    oMenuTabs.style.height   = "50px";
+    oMenuTabs.style.position = "relative";
+
+    oMenu.appendChild(oMenuTabs);
+    document.body.appendChild(oMenu);
+
+    function AddMenuItem(sLink, sTitle, bActive)
     {
-        var oHref = document.createElement("a");
-        oHref.href = sLink;
-        oHref.title = sTitle;
-        oHref.innerHTML = sTitle;
+        var TabPanel = oMenuTabs;
 
-        var oLi = document.createElement("li");
-        oLi.appendChild(oHref);
-        oMenu.appendChild(oLi);
+        var DivTab                      = document.createElement("div");
+        DivTab.style.transitionProperty = "width,height,background,margin,border,padding";
+        DivTab.style.transitionDuration = ".25s";
+
+        DivTab.style.float   = "left";
+        DivTab.style.height  = "100%";
+        DivTab.style.margin  = "0px";
+        DivTab.style.padding = "0px";
+
+        if (true !== bActive)
+            DivTab.style.backgroundColor = "transparent";
+        else
+            DivTab.style.backgroundColor = "#737373";
+
+        var NewTab      = document.createElement("button");
+        NewTab.tabIndex = "0";
+
+        NewTab.style.background                = "none";
+        NewTab.style.outline                   = "none";
+        NewTab.style.cursor                    = "pointer";
+        NewTab.style["-webkit-appearance"]     = "none";
+        NewTab.style["-webkit-border-radius"]  = "0";
+        NewTab.style.overflow                  = "visible";
+        NewTab.style.fontFamily                = '"Segoe UI",Helvetica,Tahoma,Geneva,Verdana,sans-serif';
+        NewTab.style["-webkit-font-smoothing"] = "antialiased";
+        NewTab.style.padding                   = "0px";
+        NewTab.style.border                    = "1px solid transparent";
+        NewTab.style.boxSizing                 = "border-box";
+
+        NewTab.style.fontSize = "14px";
+        NewTab.style.height   = "100%";
+        NewTab.style.margin   = "0px";
+        NewTab.style.padding  = "0px 14px 0px 14px";
+        NewTab.style.color    = "#fff";
+
+        NewTab.style.float = "left";
+
+        var NewTabDiv              = document.createElement("div");
+        var oHref                  = document.createElement("a");
+        oHref.href                 = sLink;
+        oHref.title                = sTitle;
+        oHref.innerHTML            = sTitle;
+        oHref.style.color          = "inherit";
+        oHref.style.textDecoration = "inherit";
+
+        NewTabDiv.appendChild(oHref);
+        NewTabDiv.onselectstart    = function ()
+        {
+            return false;
+        };
+        NewTab.appendChild(NewTabDiv);
+
+        DivTab.onmouseover = function ()
+        {
+            DivTab.style.backgroundColor = "#505050";
+        };
+        DivTab.onmouseout  = function ()
+        {
+            if (true !== bActive)
+                DivTab.style.backgroundColor = "transparent";
+            else
+                DivTab.style.backgroundColor = "#737373";
+        };
+
+        NewTab.onmousedown = function ()
+        {
+            DivTab.style.backgroundColor = "#969696";
+        };
+
+        DivTab.appendChild(NewTab);
+        TabPanel.appendChild(DivTab);
     }
 
-    AddMenuItem(oMenu, "http://www.webgoboard.com/index", "Kogo's joseki");
-    AddMenuItem(oMenu, "http://www.webgoboard.com/19", "Board 19x19");
-    AddMenuItem(oMenu, "http://www.webgoboard.com/13", "Board 13x13");
-    AddMenuItem(oMenu, "http://www.webgoboard.com/9", "Board 9x9");
-    AddMenuItem(oMenu, "http://www.webgoboard.com/introduction", "Introduction to Go");
-    AddMenuItem(oMenu, "http://www.webgoboard.com/problems", "Problems");
-    AddMenuItem(oMenu, "http://www.webgoboard.com/wordpressplugin", "WordPress Plugin");
-
-    document.body.appendChild(oMenu);
+    AddMenuItem("http://www.webgoboard.com/index", "Kogo's joseki", sActive === "index");
+    AddMenuItem("http://www.webgoboard.com/19", "Board 19x19", sActive === "19");
+    AddMenuItem("http://www.webgoboard.com/13", "Board 13x13", sActive === "13");
+    AddMenuItem("http://www.webgoboard.com/9", "Board 9x9", sActive === "9");
+    AddMenuItem("http://www.webgoboard.com/introduction", "Introduction to Go", sActive === "Intro");
+    AddMenuItem("http://www.webgoboard.com/problems", "Problems", sActive === "Problems");
+    AddMenuItem("http://www.webgoboard.com/wordpressplugin", "WordPress Plugin", sActive === "WordPress");
 }
 
 function LoadMainDiv()
@@ -45,7 +127,7 @@ function LoadMainDiv()
     oDiv.id             = "divId";
     oDiv.style.position = "absolute";
     oDiv.style.left     = "0px";
-    oDiv.style.top      = "35px";
+    oDiv.style.top      = nMenuHeight + "px";
     oDiv.style.width    = "100px";
     oDiv.style.height   = "100px";
     oDiv.tabIndex       = -1;
@@ -93,7 +175,7 @@ window.onresize = function()
     if (oMainDiv)
     {
         oMainDiv.style.width = window.innerWidth + "px";
-        oMainDiv.style.height = (window.innerHeight - 35) + "px";
+        oMainDiv.style.height = (window.innerHeight - nMenuHeight) + "px";
     }
 
     var oMenuUl = document.getElementById("menuId");
@@ -106,9 +188,9 @@ window.onresize = function()
         GoBoardApi.Update_Size(oGameTree);
 };
 
-function OnDocumentReady()
+function OnDocumentReady(sActive)
 {
-    LoadMenu();
+    LoadMenu(sActive);
     LoadMainDiv();
     LoadGameTree();
     window.onresize();
@@ -116,7 +198,7 @@ function OnDocumentReady()
 
 function OnDocumentReadyPresentation(aSlides)
 {
-    LoadMenu();
+    LoadMenu("Intro");
     LoadMainDiv();
     LoadGameTreePresentation(aSlides);
     window.onresize();
@@ -124,7 +206,7 @@ function OnDocumentReadyPresentation(aSlides)
 
 function OnDocumentReadyProblems()
 {
-    LoadMenu();
+    LoadMenu("Problems");
     LoadMainDiv();
     LoadGameTreeProblems();
     window.onresize();
@@ -132,7 +214,7 @@ function OnDocumentReadyProblems()
 
 function OnDocumentReadyWPPlugin()
 {
-    LoadMenu();
+    LoadMenu("WordPress");
 }
 
 function Decode_Base64_UrlSafe(sInput)
