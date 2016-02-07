@@ -16,13 +16,14 @@ function LoadMenu(sActive)
     var oMenu = document.createElement("div");
 
     oMenu.id                    = "menuId";
-    oMenu.style.position        = "absolute";
+    oMenu.style.zIndex          = 0xffffffff;
+    oMenu.style.position        = "fixed";
     oMenu.style.top             = "0px";
     oMenu.style.left            = "0px";
     oMenu.style.fontSize        = "12px";
     oMenu.style.fontFamily      = "'Segoe UI', Helvetica, Tahoma, Geneva, Verdana, sans-serif";
     oMenu.style.cursor          = "default";
-    oMenu.style.width           = "100vw";
+    oMenu.style.width           = "100%";
     oMenu.style.height          = "50px";
     oMenu.style.backgroundColor = "rgb(5, 7, 8)";
 
