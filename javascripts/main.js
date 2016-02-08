@@ -90,6 +90,10 @@ function LoadMenu(sActive)
         {
             return false;
         };
+        NewTab.onclick = function()
+        {
+            window.location.href = sLink;
+        };
         NewTab.appendChild(NewTabDiv);
 
         DivTab.onmouseover = function ()
@@ -113,13 +117,13 @@ function LoadMenu(sActive)
         TabPanel.appendChild(DivTab);
     }
 
-    AddMenuItem("http://www.webgoboard.com/index", "Kogo's joseki", sActive === "index");
-    AddMenuItem("http://www.webgoboard.com/19", "Board 19x19", sActive === "19");
-    AddMenuItem("http://www.webgoboard.com/13", "Board 13x13", sActive === "13");
-    AddMenuItem("http://www.webgoboard.com/9", "Board 9x9", sActive === "9");
-    AddMenuItem("http://www.webgoboard.com/introduction", "Introduction to Go", sActive === "Intro");
-    AddMenuItem("http://www.webgoboard.com/problems", "Problems", sActive === "Problems");
-    AddMenuItem("http://www.webgoboard.com/wordpressplugin", "WordPress Plugin", sActive === "WordPress");
+    AddMenuItem("index.html", "Kogo's joseki", sActive === "index");
+    AddMenuItem("19.html", "Board 19x19", sActive === "19");
+    AddMenuItem("13.html", "Board 13x13", sActive === "13");
+    AddMenuItem("9.html", "Board 9x9", sActive === "9");
+    AddMenuItem("introduction.html", "Introduction to Go", sActive === "Intro");
+    AddMenuItem("problems.html", "Problems", sActive === "Problems");
+    AddMenuItem("wordpressplugin.html", "WordPress Plugin", sActive === "WordPress");
 }
 
 function LoadMainDiv()
