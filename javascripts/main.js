@@ -92,7 +92,7 @@ function LoadMenu(sActive)
         };
         NewTab.onclick = function()
         {
-            window.location.href = sLink; 
+            window.location.href = sLink;
         };
         NewTab.appendChild(NewTabDiv);
 

@@ -45,6 +45,29 @@
         GoBoardApi.Load_Sgf(oGameTree, aSgfs[g_nSgfIndex], {Auto : true});
     }
 
+    function OnClickNextProblem()
+    {
+        if (aSgfs.length > 0)
+        {
+            g_nSgfIndex++;
+            if (g_nSgfIndex >= aSgfs.length)
+                g_nSgfIndex = 0;
+            Load_Problem();
+        }
+    }
+
+    function OnClickPrevProblem()
+    {
+        if (aSgfs.length > 0)
+        {
+            g_nSgfIndex--;
+            if (g_nSgfIndex < 0)
+                g_nSgfIndex = aSgfs.length - 1;
+            Load_Problem();
+        }
+    }
+
+
     function Add_NextProblemButton()
     {
         var oInput = document.createElement("input");
@@ -54,16 +77,7 @@
         oInput.style.height   = "30px";
         oInput.type           = "button";
         oInput.value          = "Next problem";
-        oInput.onclick = function()
-        {
-            if (aSgfs.length > 0)
-            {
-                g_nSgfIndex++;
-                if (g_nSgfIndex >= aSgfs.length)
-                    g_nSgfIndex = 0;
-                Load_Problem();
-            }
-        };
+        oInput.onclick = OnClickNextProblem;
 
         var oInputPrev = document.createElement("input");
         oInputPrev.style.position = "absolute";
@@ -72,16 +86,7 @@
         oInputPrev.style.height   = "30px";
         oInputPrev.type           = "button";
         oInputPrev.value          = "Prev problem";
-        oInputPrev.onclick = function()
-        {
-            if (aSgfs.length > 0)
-            {
-                g_nSgfIndex--;
-                if (g_nSgfIndex < 0)
-                    g_nSgfIndex = aSgfs.length - 1;
-                Load_Problem();
-            }
-        };
+        oInputPrev.onclick = OnClickPrevProblem;
 
         var aBody = document.getElementsByTagName('body');
 
