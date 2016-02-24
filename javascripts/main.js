@@ -212,9 +212,6 @@ function OnDocumentReadyPresentation(aSlides)
 function OnDocumentReadyProblems()
 {
     LoadMenu("Problems");
-    LoadMainDiv();
-    LoadGameTreeProblems();
-    window.onresize();
 }
 
 function OnDocumentReadyWPPlugin()
