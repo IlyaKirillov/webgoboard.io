@@ -15,8 +15,11 @@
     var oGameTree = null;
     OnDocumentReadyProblems();
 
+
+
     var aSgfs = [];
     var g_nSgfIndex = 0;
+    
     $(function ()
     {
         $.get('files/xxqj.sgf',function(sFile)
@@ -80,7 +83,7 @@
     <input type="button" style="position: relative; height: 30px; margin-right: 10px; margin-top: 10px;" value="Next problem" onclick="OnClickNextProblem();"/>
     <div style="position:relative;margin-top: 10px;margin-bottom: 10px;" id="idGameTreeProblem"></div>
     <script>
-        oGameTree = GoBoardApi.Embed('idGameTreeProblem', {boardMode : 'problems', width : '800'});
+        oGameTree = GoBoardApi.Embed('idGameTreeProblem', {boardMode : 'problems', width : '800', problemsNewNode : 'Out of variants.'});
         Load_Problem();
     </script>
 
