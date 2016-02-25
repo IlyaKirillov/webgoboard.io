@@ -45,7 +45,8 @@
         if (oGameTree)
         {
             GoBoardApi.Load_Sgf(oGameTree, aSgfs[g_nSgfIndex], {Auto : true});
-
+            document.getElementById("idGameTreeProblem").style.height = GoBoardApi.Get_DivHeightByWidth(oGameTree, 700);
+            GoBoardApi.Update_Size(oGameTree);
         }
     }
 
@@ -68,9 +69,6 @@
             if (g_nSgfIndex < 0)
                 g_nSgfIndex = aSgfs.length - 1;
             Load_Problem();
-
-            document.getElementById("idGameTreeProblem").style.height = GoBoardApi.Get_DivHeightByWidth(oGameTree, 700);
-            GoBoardApi.Update_Size(oGameTree);
         }
     }
 
